@@ -7,6 +7,9 @@ import shopRoutes from './routes/shops';
 import authRoutes from './routes/auth';
 import taskRoutes from './routes/tasks';
 import integrationRoutes from './routes/integration';
+import productRoutes from './routes/products';
+import statisticsRoutes from './routes/statistics';
+import groupRoutes from './routes/groups';
 import TaskQueue from './services/taskQueue';
 
 dotenv.config();
@@ -33,6 +36,9 @@ app.use('/api/auth', authRoutes);
 app.use('/api/shops', shopRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/integration', integrationRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/statistics', statisticsRoutes);
+app.use('/api/groups', groupRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
