@@ -6,6 +6,7 @@ import { initializeDatabase } from './database/connection';
 import shopRoutes from './routes/shops';
 import authRoutes from './routes/auth';
 import taskRoutes from './routes/tasks';
+import integrationRoutes from './routes/integration';
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/auth', authRoutes);
 app.use('/api/shops', shopRoutes);
 app.use('/api/tasks', taskRoutes);
+app.use('/api/integration', integrationRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

@@ -19,7 +19,8 @@
     "winston": "^3.11.0",
     "axios": "^1.6.2",
     "bcryptjs": "^2.4.3",
-    "jsonwebtoken": "^9.1.2"
+    "jsonwebtoken": "^9.1.2",
+    "puppeteer": "^21.1.0"
   },
   "devDependencies": {
     "typescript": "^5.2.2",
