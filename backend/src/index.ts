@@ -12,6 +12,7 @@ import productRoutes from './routes/products';
 import statisticsRoutes from './routes/statistics';
 import groupRoutes from './routes/groups';
 import scheduleRoutes, { setScheduler } from './routes/schedules';
+import exportRoutes from './routes/export';
 import TaskQueue from './services/taskQueue';
 import WebSocketService from './services/websocket';
 import SchedulerService from './services/scheduler';
@@ -43,6 +44,8 @@ app.use('/api/products', productRoutes);
 app.use('/api/statistics', statisticsRoutes);
 app.use('/api/groups', groupRoutes);
 app.use('/api/schedules', scheduleRoutes);
+app.use('/api/export', exportRoutes);
+app.use('/api/analytics', analyticsRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {
