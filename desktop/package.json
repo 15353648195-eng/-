@@ -1,0 +1,28 @@
+{
+  "name": "pdd-tool-desktop",
+  "version": "1.0.0",
+  "description": "PDD运营工具桌面应用",
+  "main": "src/main.tsx",
+  "scripts": {
+    "dev": "tauri dev",
+    "build": "tauri build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "axios": "^1.6.2",
+    "zustand": "^4.4.1",
+    "antd": "^5.11.0",
+    "@ant-design/icons": "^5.2.6"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^1.5.0",
+    "@tauri-apps/api": "^1.5.0",
+    "@types/react": "^18.2.27",
+    "@types/react-dom": "^18.2.13",
+    "vite": "^5.0.0",
+    "typescript": "^5.2.2",
+    "@vitejs/plugin-react": "^4.1.0"
+  }
+}

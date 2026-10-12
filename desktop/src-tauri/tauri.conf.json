@@ -1,0 +1,26 @@
+{
+  "build": {
+    "beforeBuildCommand": "npm run build",
+    "beforeDevCommand": "npm run dev",
+    "devPath": "http://localhost:5173",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "fullscreen": false,
+        "height": 900,
+        "resizable": true,
+        "title": "PDD运营工具",
+        "width": 1400
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "package": {
+    "productName": "pdd-tool",
+    "version": "1.0.0"
+  }
+}
