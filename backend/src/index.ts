@@ -7,6 +7,13 @@ import shopRoutes from './routes/shops';
 import authRoutes from './routes/auth';
 import taskRoutes from './routes/tasks';
 import integrationRoutes from './routes/integration';
+import TaskQueue from './services/taskQueue';
+
+dotenv.config();
+
+const app = express();
+const PORT = process.env.PORT || 3001;
+let taskQueue: TaskQueue;
 
 dotenv.config();
 
@@ -46,8 +53,19 @@ async function start() {
     await initializeDatabase();
     logger.info('Database initialized successfully');
 
+    // 初始化任务队列
+    taskQueue = new TaskQueue(process.env.BITBROWSER_API_URL);
+    await taskQueue.initialize();
+
     app.listen(PORT, () => {
       logger.info(`Server running on port ${PORT}`);
+    });
+
+    // 优雅关闭
+    process.on('SIGTERM', () => {
+      logger.info('SIGTERM received, shutting down gracefully');
+      taskQueue.stop();
+      process.exit(0);
     });
   } catch (error) {
     logger.error('Failed to start server:', error);

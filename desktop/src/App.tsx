@@ -1,6 +1,8 @@
 import { Layout, Menu, Tabs } from 'antd'
 import { ShopOutlined, BarChartOutlined, TaskOutlined } from '@ant-design/icons'
 import ShopList from './components/ShopList'
+import ProductList from './components/ProductList'
+import Statistics from './components/Statistics'
 import './App.css'
 
 const { Header, Content, Sider } = Layout
@@ -11,7 +13,7 @@ function App() {
   const menuItems = [
     { key: 'shops', icon: <ShopOutlined />, label: '店铺管理' },
     { key: 'products', icon: <BarChartOutlined />, label: '商品管理' },
-    { key: 'tasks', icon: <TaskOutlined />, label: '任务管理' },
+    { key: 'stats', icon: <TaskOutlined />, label: '数据统计' },
   ]
 
   return (
@@ -30,8 +32,8 @@ function App() {
         </Sider>
         <Content style={{ padding: '24px' }}>
           {activeKey === 'shops' && <ShopList />}
-          {activeKey === 'products' && <div>商品管理 - 开发中</div>}
-          {activeKey === 'tasks' && <div>任务管理 - 开发中</div>}
+          {activeKey === 'products' && <ProductList />}
+          {activeKey === 'stats' && <Statistics />}
         </Content>
       </Layout>
     </Layout>

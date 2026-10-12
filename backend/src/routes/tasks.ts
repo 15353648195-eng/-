@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { query } from '../database/connection';
+import { query, queryOne } from '../database/connection';
 import logger from '../utils/logger';
 
 const router = express.Router();
@@ -23,7 +23,7 @@ router.get('/', async (req: Request, res: Response) => {
       params.push(shopId);
     }
 
-    sql += ' ORDER BY created_at DESC';
+    sql += ' ORDER BY created_at DESC LIMIT 100';
 
     const result = await query(sql, params);
     res.json({ data: result.rows });
@@ -33,11 +33,32 @@ router.get('/', async (req: Request, res: Response) => {
   }
 });
 
+// 获取单个任务详情
+router.get('/:taskId', async (req: Request, res: Response) => {
+  try {
+    const { taskId } = req.params;
+    const task = await queryOne('SELECT * FROM tasks WHERE id = $1', [taskId]);
+
+    if (!task) {
+      return res.status(404).json({ error: 'Task not found' });
+    }
+
+    res.json({ data: task });
+  } catch (error) {
+    logger.error('Failed to fetch task:', error);
+    res.status(500).json({ error: 'Failed to fetch task' });
+  }
+});
+
 // 创建任务
 router.post('/', async (req: Request, res: Response) => {
   try {
     const userId = req.headers['x-user-id'] as string;
     const { shopId, taskType } = req.body;
+
+    if (!shopId || !taskType) {
+      return res.status(400).json({ error: 'Missing required parameters' });
+    }
 
     const result = await query(
       `INSERT INTO tasks (user_id, shop_id, task_type, status)
@@ -69,6 +90,10 @@ router.put('/:taskId', async (req: Request, res: Response) => {
        RETURNING *`,
       [taskId, status, result, errorMessage]
     );
+
+    if (queryResult.rows.length === 0) {
+      return res.status(404).json({ error: 'Task not found' });
+    }
 
     res.json({ data: queryResult.rows[0] });
   } catch (error) {
